@@ -1,0 +1,23 @@
+{
+  "name": "coinblock",
+  "version": "0.0.1",
+  "description": "CoinBlock prevents websites from using your browser to mine cryptocurrency without your consent.",
+  "main": "src/scripts/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shmishtopher/CoinBlock.git"
+  },
+  "keywords": [
+    "browser",
+    "extention"
+  ],
+  "author": "Shmish <shmish90@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shmishtopher/CoinBlock/issues"
+  },
+  "homepage": "https://github.com/shmishtopher/CoinBlock#readme"
+}

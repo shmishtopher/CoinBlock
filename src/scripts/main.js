@@ -1,61 +1,27 @@
-const extractHost = url => url.indexOf('://') > -1 
-  ? url.split('/')[2].split(':')[0].split('?')[0]
-  : url.split('/')[0].split(':')[0].split('?')[0]
+const _get = key => JSON.stringify(window.localStorage.getItem(key))
+const _put = (key, val) => window.localStorage.setItem(key, JSON.stringify(val))
 
-let appState = {}
-fetch(chrome.runtime.getURL('../sources/disallow.txt'))
-  .then(res => res.text())
-  .then(res => res.split('\r\n'))
-  .then(res => {
-    chrome.webRequest.onBeforeRequest.addListener(details => {
-      if (appState.paused) { return { cancel: false } }
-      if (extractHost(details.url) in appState) { return { cancel: false } }
-      else { return { cancel: true } } 
-    }, {urls: res}, ['blocking'])
-  })
+const urlToDomain = url => url.match(/:\/\/(.[^/]+)/)[1]
+const contains = (arr, val) => (arr.indexOf(val) != -1) ? true : false
 
-chrome.runtime.onMessage.addListener((request, sender, sendRes) => {
-  if ('toggle' in request) {
-    chrome.storage.sync.get(null, res => {
-      chrome.storage.sync.set({paused: !res.paused}, () => {
-        chrome.tabs.query({active: true}, tabs => {
-          sendRes({paused: !res.paused || false, whitelisted: (extractHost(tabs[0].url) in res) || false})
-          appState = res
-        })
-      })
+(() => {
+  // Update tab domains as they change
+  const activeTabs = []
+  chrome.tabs.onUpdated.addListener((tabID, _, tab) => { activeTabs[tabID] = urlToDomain(tab.url) })
+  chrome.tabs.onRemoved.addListener(tabID => { activeTabs[tabID] = null })
+
+  // Load blacklist from ../sources and set block
+  fetch(chrome.runtime.getURL('../sources/blacklist.txt'))
+    .then(urls => urls.text())
+    .then(urls => urls.split('\r\n'))
+    .then(urls => {
+      chrome.webRequest.onBeforeRequest.addListener(details => {
+        if (_get('isPaused')) { return {cancel: false} }
+        if (contains(_get('whitelist'), urlToDomain(details.url))) { return {cancel: false} }
+        return {cancel: true}
+      }, {urls}, ['blocking'])
     })
-  }
-
-  if ('host' in request) {
-    chrome.tabs.query({active: true}, tabs => {
-      chrome.storage.sync.get(null, res => {
-        sendRes({paused: res.paused || false, whitelisted: (extractHost(tabs[0].url) in res) || false})
-        appState = res
-      })
+    .catch(err => {
+      console.log(err)
     })
-  }
-
-  if ('blacklist' in request) {
-    chrome.tabs.query({active: true}, tabs => {
-      chrome.storage.sync.remove(extractHost(tabs[0].url), () => {
-        chrome.storage.sync.get(null, res => {
-          sendRes({paused: res.paused || false, whitelisted: false})
-          appState = res
-        })
-      })
-    })
-  }
-
-  if ('whitelist' in request) {
-    chrome.tabs.query({active: true}, tabs => {
-      chrome.storage.sync.set({[extractHost(tabs[0].url)]: true}, () => {
-        chrome.storage.sync.get(null, res => {
-          sendRes({paused: res.paused || false, whitelisted: true})
-          appState = res
-        })
-      })
-    })
-  }
-
-  return true
-})
+})()

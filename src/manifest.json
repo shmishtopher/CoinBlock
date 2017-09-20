@@ -5,7 +5,7 @@
   "description": "CoinBlock blocks services like CoinHive from using your browser to mine cryptocurrency without your consent",
   "version": "0.1",
   "author": "Shmish <shmish90@gmail.com>",
-  "icons": {"19": "assets/icon.png"},
+  "icons": {"19": "static/icon.png"},
 
   "permissions": [
     "storage",            // Load & save whitelist
@@ -22,7 +22,7 @@
 
   "browser_action": {
     "default_title": "CoinBlock",
-    "default_icon": "assets/icon.png",
-    "default_popup": "markup/popup.html"
+    "default_icon": "static/icon.png",
+    "default_popup": "static/popup.html"
   }
 }
