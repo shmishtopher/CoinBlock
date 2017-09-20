@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+
+  "name": "CoinBlock",
+  "description": "CoinBlock blocks services like CoinHive from using your browser to mine cryptocurrency without your consent",
+  "version": "0.1",
+  "author": "Shmish <shmish90@gmail.com>",
+  "icons": {"19": "assets/icon.png"},
+
+  "permissions": [
+    "storage",            // Load & save whitelist
+    "webRequest",         // Enable request api
+    "webRequestBlocking", // Block blacklisted sources
+    "tabs",               // Regiter hosts for whitelist
+    "<all_urls>"          // Run on all tabs
+  ],
+
+  "background": {
+    "scripts": ["scripts/main.js"],
+    "persistent": true
+  },
+
+  "browser_action": {
+    "default_title": "CoinBlock",
+    "default_icon": "assets/icon.png",
+    "default_popup": "markup/popup.html"
+  }
+}
