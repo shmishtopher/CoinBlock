@@ -1,6 +1,5 @@
 # CoinBlock
-CoinBlock blocks services like CoinHive from using your browser to mine cryptocurrency without your consent.
+:crystal_ball: CoinBlock blocks services like CoinHive from using your browser to mine cryptocurrency without your consent.
 
-This is a proof of concept, refactor is required
-
-Coming Soon!
+### What?
+CoinBlock is a browser extention that blocks requests to browser mining services.  It currently works in the chrome browser, with support for other browsers on the way.
