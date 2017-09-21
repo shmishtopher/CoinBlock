@@ -13,11 +13,9 @@ recently, some sites have turned to cryptocurrency mining for revenue.  While no
 
 ### How?
 #### Use:
-do one of the following
 + Install the extention for your browser of choice
 + Load the source as an unpacked extention
 #### Contribute:
-if you want to contribute to the project, make a pull request of file an issue that contains
 + A bug or bugfix
 + Feature requests
 + Blacklist updates
