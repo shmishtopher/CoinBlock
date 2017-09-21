@@ -1,6 +1,7 @@
 # CoinBlock
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)]()
 [![license](https://img.shields.io/github/license/shmishtopher/CoinBlock.svg)](#)
+
 :zap: CoinBlock blocks services like CoinHive from using your browser to mine cryptocurrency without your consent.
 
 ### What?
