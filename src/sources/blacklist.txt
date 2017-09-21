@@ -1,6 +1,0 @@
-https://www.coin-hive.com/lib*
-https://coin-hive.com/lib*
-https://www.coin-hive.com/captcha*
-https://coin-hive.com/captcha*
-http://www.tidbit.co.in/*
-http://tidbit.co.in/*
