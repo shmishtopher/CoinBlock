@@ -1,5 +1,6 @@
 *://coin-hive.com/lib*
 *://coin-hive.com/captcha*
+*://coin-hive.com/proxy*
 *://jsecoin.com/server*
 *://*.jsecoin.com/server*
 *://static.reasedoper.pw/*
@@ -7,3 +8,5 @@
 *://listat.biz/*
 *://lmodr.biz/*
 *://minecrunch.co/web/*
+*://jyhfuqoh.info/*
+*://edgeno.de/*
